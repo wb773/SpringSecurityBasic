@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Security Test</title>
+    <script>
+        async function sendRequest(url, method = 'GET', auth = null) {
+            // try {
+            //     const headers = new Headers();
+            //     headers.append('Content-Type', 'application/json')
+            //     if (auth) {
+            //         headers.append('Authorization', 'Basic ' + btoa(auth.username + ':' + auth.password));
+            //     }
+            //     console.log(auth);
+            //     console.log(headers);
+            //     const response = await fetch('http://localhost:8080' + url, { method, headers, mode: 'cors' });
+            //     const data = await response.text();
+            //     alert(`Status: ${response.status}\n\n${data}`);
+            // } catch (error) {
+            //     alert('Request failed: ' + error.message);
+            // }
+
+            fetch('http://localhost:8080/private', {
+                method: 'GET', // HTTPメソッド
+                headers: {
+                    'Authorization': 'Basic ' + btoa('hoge:pass') // ユーザ名とパスワードをBase64エンコード
+                }
+            })
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+
+        }
+
+        function onRequest(endpoint) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const auth = username && password ? { username, password } : null;
+            sendRequest(endpoint, 'GET', auth);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Spring Security Test</h1>
+    <div>
+        <button onclick="onRequest('/hello')">Request /hello (Public)</button>
+        <button onclick="onRequest('/auth/test')">Request /auth/test (Public)</button>
+        <button onclick="onRequest('/private')">Request /private (Secure)</button>
+    </div>
+    <div style="margin-top: 20px;">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password">
+    </div>
+</body>
+
+</html>
