@@ -9,7 +9,7 @@
 import { ref } from 'vue';
 
 // 例えば、別のコンポーネントまたはサービス内で
-import { useAuthStore } from '@/stores/cert';
+import { useAuthStore } from '@/stores/auth';
 import axios from 'axios';
 
 const authStore = useAuthStore();

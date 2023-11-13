@@ -7,20 +7,6 @@
     <title>Spring Security Test</title>
     <script>
         async function sendRequest(url, method = 'GET', auth = null) {
-            // try {
-            //     const headers = new Headers();
-            //     headers.append('Content-Type', 'application/json')
-            //     if (auth) {
-            //         headers.append('Authorization', 'Basic ' + btoa(auth.username + ':' + auth.password));
-            //     }
-            //     console.log(auth);
-            //     console.log(headers);
-            //     const response = await fetch('http://localhost:8080' + url, { method, headers, mode: 'cors' });
-            //     const data = await response.text();
-            //     alert(`Status: ${response.status}\n\n${data}`);
-            // } catch (error) {
-            //     alert('Request failed: ' + error.message);
-            // }
 
             fetch('http://localhost:8080/private', {
                 method: 'GET', // HTTPメソッド
